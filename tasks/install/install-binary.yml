@@ -1,0 +1,21 @@
+---
+- name: install utilities
+  apt: name={{ item }}
+       state=latest
+
+  with_items:
+  - zfsutils-linux
+  - curl
+
+
+- name: prepare zpool
+  shell: fallocate -l 3G /root/zfs.disk && zpool create -f chq /root/zfs.disk
+  args:
+    executable: /bin/bash
+
+
+- name: download fli binary
+  get_url: url=http://getfli.clusterhq.com/fli
+           dest=/usr/local/bin/fli
+           mode=0644
+           force=no

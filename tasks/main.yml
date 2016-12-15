@@ -1,0 +1,6 @@
+---
+- include: install/install-container.yml
+  tags: install_container
+
+- include: install/install-binary.yml
+  tags: install_binary
